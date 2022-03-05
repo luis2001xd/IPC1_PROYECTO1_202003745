@@ -1,10 +1,15 @@
-public class AlmacenarUsuarios extends CrearUsuarios {
+public class AlmacenarUsuarios  {
 public String ID;
 public String Nombre;
 public String Apellido;
 public String Usuario;
 public String Rol;
 public String Contraseña;
+    public static AlmacenarUsuarios []us= new AlmacenarUsuarios[100];
+
+
+
+
 
     public AlmacenarUsuarios(String ID, String Nombre, String Apellido, String Usuario,String Rol ,String Contraseña) {
 
@@ -14,6 +19,7 @@ public String Contraseña;
       this.Usuario=Usuario;
       this.Rol=Rol;
       this.Contraseña=Contraseña;
+
     }
 
 
@@ -64,6 +70,8 @@ public String Contraseña;
     public void setContraseña(String contraseña) {
         Contraseña = contraseña;
     }
+
+
 
 }
 

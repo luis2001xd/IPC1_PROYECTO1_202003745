@@ -90,16 +90,14 @@ public class Login extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               if (texto.getText().equals("admin")&& texto1.getText().equals("password")){
-Admin x= new Admin();
-x.setVisible(true);
-dispose();
-               } else {
-                   JOptionPane.showMessageDialog(null, "Credenciales inválidas intentelo nuevamente",
-                           "ERROR", JOptionPane.WARNING_MESSAGE);
-                   texto.setText(null);
-                   texto1.setText(null);
-               }
+                ControlarUsuarios m= new ControlarUsuarios();
+                if (texto.getText().equals("admin")&& texto1.getText().equals("password")){
+                    Admin h= new Admin();
+                    h.setVisible(true);
+                    dispose();
+                } else {
+                m.Confirmar(texto.getText(),texto1.getText());
+                }
             }
         };
         boton.addActionListener(oyente);

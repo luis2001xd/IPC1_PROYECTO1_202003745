@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 public class Admin extends JFrame {
 
     Border border = BorderFactory.createMatteBorder(3,3,3,3,Color.LIGHT_GRAY);
-JPanel panel;
+public JPanel panel;
+public VerUsuarios Tabla;
     public Admin (){
         this.setSize(1150,700);
         this.setTitle("                                                                                      Administrador");
@@ -103,6 +104,16 @@ JPanel panel;
         modificar.setFont(new Font("Georgia",Font.PLAIN,18));
         panel.add(modificar);
 
+        ActionListener oyente3= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+EditarUsuarios x= new EditarUsuarios();
+x.setVisible(true);
+dispose();
+            }
+        };
+        modificar.addActionListener(oyente3);
+
         JButton ver= new JButton();
         ver.setBounds(340,400,100,40);
         ver.setText("Ver ");
@@ -111,6 +122,17 @@ JPanel panel;
         ver.setFont(new Font("Georgia",Font.PLAIN,18));
         panel.add(ver);
 
+        ActionListener oyente2= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+String [] columnas ={"ID","Nombre","Apellido","Usuario","Rol","Contraseña"};
+String [][] datos= ControlarUsuarios.obtenerDatos();
+
+Tabla= new VerUsuarios(datos,columnas);
+Tabla.setVisible(true);
+            }
+        };
+ver.addActionListener(oyente2);
         ActionListener oyente1= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -202,6 +224,16 @@ JPanel panel;
         logout.setBorder(border);
         logout.setFont(new Font("Georgia",Font.PLAIN,16));
         panel.add(logout);
+
+        ActionListener oyente4= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            dispose();
+            Login m= new Login();
+            m.setVisible(true);
+            }
+        };
+        logout.addActionListener(oyente4);
 
     }
 

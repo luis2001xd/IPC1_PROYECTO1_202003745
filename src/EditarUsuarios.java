@@ -4,19 +4,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CrearUsuarios extends JFrame{
+public class EditarUsuarios extends JFrame{
     public JTextField ID;
     public JTextField Nombre,Apellido,Usuario;
     public JPasswordField Contraseña,Confirmar;
     public JComboBox rol;
-    JButton crear;
+    JButton crear,buscar1;
+    public static AlmacenarUsuarios x;
+
 
     public JPanel panel;
     Border border = BorderFactory.createMatteBorder(2,2,2,2,Color.LIGHT_GRAY);
-    public CrearUsuarios (){
-
-
-        this.setTitle("                                                CREAR USUARIO");
+    public EditarUsuarios (){
+        this.setTitle("                                                 MODIFICAR USUARIO");
         Paneles();
         this.setSize(500,500);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -42,7 +42,7 @@ public class CrearUsuarios extends JFrame{
         ID.setText("ID");
         ID.setFont(new Font("arial",Font.BOLD,12));
         ID.setBounds(50,35,20,15);
-        panel.add(ID);
+        //panel.add(ID);
 
         JLabel Nombre=new JLabel();
         Nombre.setText("Nombre");
@@ -121,21 +121,19 @@ public class CrearUsuarios extends JFrame{
     public void Botones(){
         crear= new JButton();
         crear.setBounds(120,325,80,20);
-        crear.setText("Crear ");
+        crear.setText("Modificar ");
         crear.setBackground(new Color(214, 219, 223));
         crear.setBorder(border);
         panel.add(crear);
-
-
-       ActionListener create= new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
+        ActionListener modificar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               creacion();
                dispose();
-           creacion();
+            }
+        };
+        crear.addActionListener(modificar);
 
-           }
-       };
-       crear.addActionListener(create);
 
 
         JButton cancelar= new JButton();
@@ -148,18 +146,42 @@ public class CrearUsuarios extends JFrame{
         ActionListener cancelar1= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Admin x= new Admin();
-                x.setVisible(true);
-                dispose();
+                Admin y= new Admin();
+                y.setVisible(true);
+dispose();
             }
         };
         cancelar.addActionListener(cancelar1);
+
+        buscar1= new JButton();
+        buscar1.setBounds(50,35,80,20);
+        buscar1.setText("Buscar ");
+        buscar1.setBackground(new Color(214, 219, 223));
+        buscar1.setBorder(border);
+        panel.add(buscar1);
+
+        ActionListener oyente= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            AlmacenarUsuarios x= ControlarUsuarios.buscar(ID.getText());
+            Nombre.setText(x.getNombre());
+            Apellido.setText(x.getApellido());
+            Usuario.setText(x.getUsuario());
+            rol.setSelectedItem(x.getRol().toString());
+            Contraseña.setText(x.getContraseña());
+Confirmar.setText(x.getContraseña());
+            }
+        };
+        buscar1.addActionListener(oyente);
+
+
     }
 
 
     public void creacion (){
         AlmacenarUsuarios x= new AlmacenarUsuarios(ID.getText(),Nombre.getText(),Apellido.getText(),Usuario.getText(),rol.getSelectedItem().toString(),Contraseña.getText());
-        ControlarUsuarios.guardar(x);
+        ControlarUsuarios.modificar(x);
+        JOptionPane.showMessageDialog(this,"Usuario modificado correctamente");
         Admin m= new Admin();
         m.setVisible(true);
     }
@@ -167,7 +189,8 @@ public class CrearUsuarios extends JFrame{
 
 
 
-    }
+}
+
 
 
 
