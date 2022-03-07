@@ -46,7 +46,7 @@ public class ControlarBiblios {
     }
 
     public static String [][] obtenerDaTes(String luis){
-        String datos [][]= new String[cantidadBiblios][6];
+        String datos [][]= new String[cantidadBiblios][7];
         int posicion=0;
 if (luis.equals("Tesis")) {
     for (AlmacenarTesis tes : x) {

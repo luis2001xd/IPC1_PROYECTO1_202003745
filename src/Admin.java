@@ -126,7 +126,10 @@ dispose();
         ActionListener oyente2= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+String [] columnas ={"ID","Nombre","Apellido","Usuario","Rol","Contraseña"};
+String [][] datos= ControlarUsuarios.obtenerDatos();
+Tabla= new VerUsuarios(datos,columnas);
+Tabla.setVisible(true);
 
             }
         };
@@ -200,8 +203,7 @@ eliminar.addActionListener(oyente4);
         ActionListener verb= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Tabla2.setVisible(true);
-
+Tabla2.setVisible(true);
             }
         };
         ver.addActionListener(verb);
