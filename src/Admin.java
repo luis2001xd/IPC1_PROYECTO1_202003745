@@ -6,10 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Admin extends JFrame {
-
+VerBiblio j;
     Border border = BorderFactory.createMatteBorder(3,3,3,3,Color.LIGHT_GRAY);
 public JPanel panel;
 public VerUsuarios Tabla;
+public VerBiblio Tabla2;
     public Admin (){
         this.setSize(1150,700);
         this.setTitle("                                                                                      Administrador");
@@ -149,7 +150,15 @@ ver.addActionListener(oyente2);
         eliminar.setBorder(border);
         eliminar.setFont(new Font("Georgia",Font.PLAIN,18));
         panel.add(eliminar);
-
+ActionListener oyente4= new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    EliminarUs r= new EliminarUs();
+    r.setVisible(true);
+    dispose();
+    }
+};
+eliminar.addActionListener(oyente4);
 
 
 
@@ -164,6 +173,16 @@ ver.addActionListener(oyente2);
         crear.setBorder(border);
         crear.setFont(new Font("Georgia",Font.PLAIN,18));
         panel.add(crear);
+
+        ActionListener create= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CrearBibliografías x= new CrearBibliografías();
+                x.setVisible(true);
+                dispose();
+            }
+        };
+        crear.addActionListener(create);
 
         JButton modificar= new JButton();
         modificar.setBounds(700,490,100,40);
@@ -180,6 +199,18 @@ ver.addActionListener(oyente2);
         ver.setBorder(border);
         ver.setFont(new Font("Georgia",Font.PLAIN,18));
         panel.add(ver);
+
+        ActionListener verb= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String [] columnas1 ={"Tipo","Autor","Titulo","Edición","Descripcion","Temas","Copias","Disponibles"};
+                String [][] datos= ControlarBiblios.obtenerDaLib();
+                Tabla2= new VerBiblio(datos,columnas1);
+                Tabla2.setVisible(true);
+
+            }
+        };
+        ver.addActionListener(verb);
 
         JButton eliminar= new JButton();
         eliminar.setBounds(890,490,100,40);

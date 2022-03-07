@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EditarUsuarios extends JFrame{
+public class EliminarUs extends JFrame{
     public JTextField ID;
     public JTextField Nombre,Apellido,Usuario;
     public JPasswordField Contraseña,Confirmar;
@@ -15,11 +15,11 @@ public class EditarUsuarios extends JFrame{
 
     public JPanel panel;
     Border border = BorderFactory.createMatteBorder(2,2,2,2,Color.LIGHT_GRAY);
-    public EditarUsuarios (){
-        this.setTitle("                                                 MODIFICAR USUARIO");
+    public EliminarUs(){
+        this.setTitle("                                                 Eliminar Usuarios");
         Paneles();
         this.setSize(500,500);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -121,15 +121,15 @@ public class EditarUsuarios extends JFrame{
     public void Botones(){
         crear= new JButton();
         crear.setBounds(120,325,80,20);
-        crear.setText("Modificar ");
+        crear.setText("Eliminar ");
         crear.setBackground(new Color(214, 219, 223));
         crear.setBorder(border);
         panel.add(crear);
         ActionListener modificar = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               creacion();
-               dispose();
+                eliminacion();
+                dispose();
             }
         };
         crear.addActionListener(modificar);
@@ -148,7 +148,7 @@ public class EditarUsuarios extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Admin y= new Admin();
                 y.setVisible(true);
-dispose();
+                dispose();
             }
         };
         cancelar.addActionListener(cancelar1);
@@ -163,17 +163,23 @@ dispose();
         ActionListener oyente= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            AlmacenarUsuarios x= ControlarUsuarios.buscar(ID.getText());
-            try {
-                Nombre.setText(x.getNombre());
-                Apellido.setText(x.getApellido());
-                Usuario.setText(x.getUsuario());
-                rol.setSelectedItem(x.getRol().toString());
-                Contraseña.setText(x.getContraseña());
-                Confirmar.setText(x.getContraseña());
-            } catch (NullPointerException m){
-                JOptionPane.showMessageDialog(null,"El usuario no existe");
-            }
+                AlmacenarUsuarios x= ControlarUsuarios.buscar(ID.getText());
+                try {
+                    Nombre.setText(x.getNombre());
+                    Apellido.setText(x.getApellido());
+                    Usuario.setText(x.getUsuario());
+                    rol.setSelectedItem(x.getRol().toString());
+                    Contraseña.setText(x.getContraseña());
+                    Confirmar.setText(x.getContraseña());
+                } catch (NullPointerException m){
+                    JOptionPane.showMessageDialog(null,"El usuario no existe");
+                }
+                Nombre.setEnabled(false);
+                Apellido.setEnabled(false);
+                Usuario.setEnabled(false);
+                rol.setEnabled(false);
+                Contraseña.setEnabled(false);
+                Confirmar.setEnabled(false);
             }
         };
         buscar1.addActionListener(oyente);
@@ -182,9 +188,9 @@ dispose();
     }
 
 
-    public void creacion (){
+    public void eliminacion (){
         AlmacenarUsuarios x= new AlmacenarUsuarios(ID.getText(),Nombre.getText(),Apellido.getText(),Usuario.getText(),rol.getSelectedItem().toString(),Contraseña.getText());
-        ControlarUsuarios.modificar(x);
+        ControlarUsuarios.eliminar(x);
         Admin m= new Admin();
         m.setVisible(true);
     }
@@ -193,6 +199,7 @@ dispose();
 
 
 }
+
 
 
 

@@ -9,11 +9,6 @@ public class ControlarUsuarios {
         for (int i=0;i< us.length;i++){
             if (us[i]==null){
                 us[i]= nuevous;
-                System.out.println(us[i].getUsuario());
-                while (i==3){
-                    System.out.println(us[1].getUsuario());
-                    i++;
-                }
                 Cantidad++;
                 break;
             }
@@ -42,6 +37,7 @@ posicion++;
         return datos;
     }
 
+
     public static AlmacenarUsuarios buscar(String ID){
         for (int i=0; i< us.length;i++) {
             if (us[i] != null){
@@ -62,17 +58,44 @@ public  void Confirmar(String x, String y){
                 if (us[i].getUsuario().equals(x)&& us[i].getContraseña().equals(y)){
                     InterfazUsuario r= new InterfazUsuario();
                     r.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null,"Credenciales invalidas");
+                    break;
+                } else if (us[i].getUsuario().equals(x)&& !us[i].getUsuario().equals(y)){
+                    JOptionPane.showMessageDialog(null,"Credenciales inválidas ");
+                    break;
                 }
+
+            }
+            try {
+                if (us[i].getUsuario().equals(null)&& us[i].getContraseña().equals(null)){
+
+                }
+            }catch(NullPointerException e) {
+                JOptionPane.showMessageDialog(null,"El usuario no existe, ponganse en contacto con el administrador");
+                break;
             }
         }
 }
+
+
 
     public static void modificar (AlmacenarUsuarios nuevous){
         for (int i=0;i< us.length;i++){
             if (us[i]!=null){
                 us[i]= nuevous;
+                JOptionPane.showMessageDialog(null,"Usuario modificado con exito");
+                break;
+            }
+        }
+
+    }
+
+
+
+    public static void eliminar (AlmacenarUsuarios nuevous){
+        for (int i=0;i< us.length;i++){
+            if (us[i]!=null){
+                us[i]= null;
+                JOptionPane.showMessageDialog(null,"Usuario eliminado con exito");
                 break;
             }
         }
