@@ -45,77 +45,72 @@ public class ControlarBiblios {
         }
     }
 
-    public static String [][] obtenerDaTes(){
+    public static String [][] obtenerDaTes(String luis){
         String datos [][]= new String[cantidadBiblios][6];
         int posicion=0;
+if (luis.equals("Tesis")) {
+    for (AlmacenarTesis tes : x) {
+        if (tes != null) {
+            String[] fila = {
+                    tes.getTipos(),
+                    tes.getAutor(),
+                    tes.getTitulo(),
+                    tes.getStredicion(),
+                    tes.getDescripción(),
+                    tes.getTemasconcatenados(),
+                    tes.getStrcopias(),
+                    tes.getStrdisponibles()
 
-        for (AlmacenarTesis tes:x){
-            if (tes !=null){
-                String [] fila= {
-                        tes.getTipos(),
-                        tes.getAutor(),
-                        tes.getTitulo(),
-                        tes.getStredicion(),
-                        tes.getDescripción(),
-                        tes.getTemasconcatenados(),
-                        tes.getStrcopias(),
-                        tes.getStrdisponibles()
-
-                };
-                datos[posicion]=fila;
-                posicion++;
-            }
+            };
+            datos[posicion] = fila;
+            posicion++;
         }
+    }
+}
+else if (luis.equals("Revista")){
+    for (AlmacenarRevistas rev:y){
+        if (rev !=null){
+            String [] fila= {
+                    rev.getRevista(),
+                    rev.getAutor(),
+                    rev.getTitulo(),
+                    rev.getStrEdicion(),
+                    rev.getDescripción(),
+                    rev.getTemasconcatenados(),
+                    rev.getStrcopias(),
+                    rev.getStrdisponibles()
+
+            };
+            datos[posicion]=fila;
+            posicion++;
+        }
+    }
+
+} else if(luis.equals("Libros")){
+    for (AlmacenarLibros lib:z){
+        if (lib !=null){
+            String [] fila= {
+                    lib.getLibros(),
+                    lib.getAutor(),
+                    lib.getTitulo(),
+                    lib.getStredicion(),
+                    lib.getDescripción(),
+                    lib.getTemasconcatenados(),
+                    lib.getStrcopias(),
+                    lib.getStrdisponibles()
+
+            };
+            datos[posicion]=fila;
+            posicion++;
+        }
+    }
+}
         return datos;
     }
 
-    public static String [][] obtenerDaRes(){
-        String datos [][]= new String[cantidadBiblios][6];
-        int posicion=0;
 
-        for (AlmacenarRevistas rev:y){
-            if (rev !=null){
-                String [] fila= {
-                        rev.getRevista(),
-                        rev.getAutor(),
-                        rev.getTitulo(),
-                        rev.getStrEdicion(),
-                        rev.getDescripción(),
-                        rev.getTemasconcatenados(),
-                        rev.getStrcopias(),
-                        rev.getStrdisponibles()
 
-                };
-                datos[posicion]=fila;
-                posicion++;
-            }
-        }
-        return datos;
-    }
 
-    public static String [][] obtenerDaLib(){
-        String datos [][]= new String[cantidadBiblios][8];
-        int posicion=0;
-
-        for (AlmacenarLibros lib:z){
-            if (lib !=null){
-                String [] fila= {
-                        lib.getLibros(),
-                        lib.getAutor(),
-                        lib.getTitulo(),
-                        lib.getStredicion(),
-                        lib.getDescripción(),
-                        lib.getTemasconcatenados(),
-                        lib.getStrcopias(),
-                        lib.getStrdisponibles()
-
-                };
-                datos[posicion]=fila;
-                posicion++;
-            }
-        }
-        return datos;
-    }
 
 }
 

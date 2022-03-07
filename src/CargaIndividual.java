@@ -176,7 +176,6 @@ public class CargaIndividual extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String tema1 = Temas.getText();
-                String[] temas = tema1.split(",");
                 String [] columnas1 ={"Tipo","Autor","Titulo","Edición","Descripcion","Temas","Copias","Disponibles"};
                 if (tipo.getSelectedItem().equals("Libros")){
                     try {
@@ -186,9 +185,7 @@ public class CargaIndividual extends JFrame {
                     } catch (NumberFormatException m) {
                         JOptionPane.showMessageDialog(null, "No se rellenaron los campos correctamente");
                     }
-                    String [][] datos= ControlarBiblios.obtenerDaLib();
-                    tabla= new VerBiblio(datos,columnas1);
-                    tabla.setVisible(true);
+
             }
 
                 if (tipo.getSelectedItem().equals("Revista")){
@@ -199,9 +196,7 @@ public class CargaIndividual extends JFrame {
                     } catch (NumberFormatException m) {
                         JOptionPane.showMessageDialog(null, "No se rellenaron los campos correctamente");
                     }
-                    String [][] datos= ControlarBiblios.obtenerDaRes();
-                    tabla= new VerBiblio(datos,columnas1);
-                    tabla.setVisible(true);
+
                 }
 
                 if (tipo.getSelectedItem().equals("Tesis")){
@@ -212,10 +207,10 @@ public class CargaIndividual extends JFrame {
                     } catch (NumberFormatException m) {
                         JOptionPane.showMessageDialog(null, "No se rellenaron los campos correctamente");
                     }
-                    String [][] datos= ControlarBiblios.obtenerDaTes();
-                    tabla= new VerBiblio(datos,columnas1);
-                    tabla.setVisible(true);
+
                 }
+                String [][]datos=ControlarBiblios.obtenerDaTes(tipo.getSelectedItem().toString());
+                tabla= new VerBiblio(datos,columnas1);
                 Admin h= new Admin();
                 h.setVisible(true);
                 dispose();

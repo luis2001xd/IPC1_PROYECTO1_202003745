@@ -126,11 +126,8 @@ dispose();
         ActionListener oyente2= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-String [] columnas ={"ID","Nombre","Apellido","Usuario","Rol","Contraseña"};
-String [][] datos= ControlarUsuarios.obtenerDatos();
 
-Tabla= new VerUsuarios(datos,columnas);
-Tabla.setVisible(true);
+
             }
         };
 ver.addActionListener(oyente2);
@@ -203,9 +200,6 @@ eliminar.addActionListener(oyente4);
         ActionListener verb= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String [] columnas1 ={"Tipo","Autor","Titulo","Edición","Descripcion","Temas","Copias","Disponibles"};
-                String [][] datos= ControlarBiblios.obtenerDaLib();
-                Tabla2= new VerBiblio(datos,columnas1);
                 Tabla2.setVisible(true);
 
             }
