@@ -6,7 +6,7 @@ public class Principal {
  //Inicio inicio= new Inicio();
       //   inicio.setLayout(null);
 //inicio.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-new Admin();
+new InterfazUsuario();
 
     }
 }

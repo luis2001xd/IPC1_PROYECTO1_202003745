@@ -10,18 +10,23 @@ public class VerBiblio extends JFrame {
     private JTable tbLecturas; //Objeto tabla
     private JScrollPane scpScroll; //Este panel permite tener barras de desplazamiento vertical u horizontal
 
-    public VerBiblio(String[][] datos, String[] columnas) {
-        this.columnas = columnas;
-        this.datos = datos;
-
+    public VerBiblio() {
+        crear();
         definirPropiedades();
         iniciarComponentes();
+    }
+
+    public void crear(){
+        String [] columnas ={"Tipo","Autor","Titulo","Edición","Descripcion","Temas","Copias","Disponibles","Frecuencia","Ejemplares","Aréa"};
+        String [][]datos=ControlarBiblios.obtenerDaTes();
+        this.columnas = columnas;
+        this.datos = datos;
     }
 
     private void definirPropiedades() {
         //Configuración de la ventana
         setTitle("Tabla de Usuarios");
-        setSize(800,400);
+        setSize(1000,700);
         setLayout(null);
         setLocationRelativeTo(this);
     }
@@ -29,7 +34,7 @@ public class VerBiblio extends JFrame {
     private void iniciarComponentes() {
         //Definición del panel
         plTabla = new JPanel();
-        plTabla.setBounds(0, 0, 800, 400);
+        plTabla.setBounds(50, 0, 900, 600);
         plTabla.setBackground(Color.darkGray);
         plTabla.setLayout(null);
         add(plTabla);
@@ -39,7 +44,7 @@ public class VerBiblio extends JFrame {
 
         //Definición del Scroll Panel(Con barras de desplazamiento vertical y horizontal)
         scpScroll = new JScrollPane(tbLecturas);
-        scpScroll.setBounds(50, 25, 700, 300);
+        scpScroll.setBounds(60, 25, 800, 550);
         plTabla.add(scpScroll);
     }
 }

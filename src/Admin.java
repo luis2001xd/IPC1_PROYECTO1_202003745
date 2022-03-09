@@ -105,6 +105,8 @@ public VerBiblio Tabla2;
         modificar.setFont(new Font("Georgia",Font.PLAIN,18));
         panel.add(modificar);
 
+
+
         ActionListener oyente3= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,7 +139,6 @@ ver.addActionListener(oyente2);
         ActionListener oyente1= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
 
             }
         };
@@ -192,6 +193,16 @@ eliminar.addActionListener(oyente4);
         modificar.setFont(new Font("Georgia",Font.PLAIN,18));
         panel.add(modificar);
 
+        ActionListener modificar1= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ModificarBiblios r= new ModificarBiblios();
+                r.setVisible(true);
+                dispose();
+            }
+        };
+        modificar.addActionListener(modificar1);
+
         JButton ver= new JButton();
         ver.setBounds(890,400,100,40);
         ver.setText("Ver ");
@@ -203,6 +214,7 @@ eliminar.addActionListener(oyente4);
         ActionListener verb= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+Tabla2= new VerBiblio();
 Tabla2.setVisible(true);
             }
         };
@@ -215,6 +227,15 @@ Tabla2.setVisible(true);
         eliminar.setBorder(border);
         eliminar.setFont(new Font("Georgia",Font.PLAIN,18));
        panel.add(eliminar);
+       ActionListener el=new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+             EliminarBiblios p= new EliminarBiblios();
+             p.setVisible(true);
+             dispose();
+           }
+       };
+       eliminar.addActionListener(el);
 
     }
 
@@ -227,6 +248,17 @@ Tabla2.setVisible(true);
         usuario.setBorder(border);
         usuario.setFont(new Font("Georgia",Font.PLAIN,16));
         panel.add(usuario);
+
+        ActionListener usre= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+VerReportesUs x= new VerReportesUs();
+x.setVisible(true);
+
+
+            }
+        };
+        usuario.addActionListener(usre);
 
         JButton bibliografia = new JButton();
         bibliografia.setBounds(780,200,100,34);

@@ -13,6 +13,7 @@ public class AlmacenarRevistas {
     public String strcopias;
     public String strdisponibles;
     public String temasconcatenados;
+    public String strEjemplares;
 
 
 
@@ -30,6 +31,7 @@ public class AlmacenarRevistas {
         this.strEdicion=edicion;
         this.strcopias=copias;
         this.strdisponibles=disponibles;
+        this.strEjemplares=Ejemplares;
         this.temasconcatenados=temas.replace(",",";");
 
     }
@@ -152,5 +154,13 @@ public class AlmacenarRevistas {
 
     public void setTemasconcatenados(String temasconcatenados) {
         this.temasconcatenados = temasconcatenados;
+    }
+
+    public String getStrEjemplares() {
+        return strEjemplares;
+    }
+
+    public void setStrEjemplares(String strEjemplares) {
+        this.strEjemplares = strEjemplares;
     }
 }

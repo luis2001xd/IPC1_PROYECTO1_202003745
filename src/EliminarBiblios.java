@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CargaIndividual extends JFrame {
+public class EliminarBiblios extends JFrame {
     Border border = BorderFactory.createMatteBorder(2,2,2,2,Color.LIGHT_GRAY);
     public JPanel panel;
     public JComboBox tipo;
@@ -12,10 +12,10 @@ public class CargaIndividual extends JFrame {
     public JTextField Tipo,Autor,Titulo,Edicion,Descripcion,Temas,Frecuencia,Ejemplares,Copias,Disponibles,Area;
     public JLabel Tipotext,Autortext,Titulotext,Ediciontext,Descripciontext,Temastext,FrecuenciaText,EjemplaresText,CopiasText,DisponiblesText,AreaText;
     public JButton Crear,Cancelar,Seleccionar;
-    public CargaIndividual(){
+    public EliminarBiblios(){
 
         this.setSize(950,650);
-        this.setTitle("                                                                                              Carga Individual");
+        this.setTitle("                                                                                              Modificar Biblios");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         paneles();
         this.setVisible(true);
@@ -165,7 +165,7 @@ public class CargaIndividual extends JFrame {
     public void botones(){
         Crear= new JButton();
         Crear.setBounds(280,500,100,40);
-        Crear.setText("Crear ");
+        Crear.setText("Eliminar ");
         Crear.setBackground(new Color(214, 219, 223));
         Crear.setFont(new Font("arial",Font.BOLD,16));
         Crear.setBorder(border);
@@ -175,42 +175,19 @@ public class CargaIndividual extends JFrame {
         ActionListener create= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tema1 = Temas.getText();
-
                 if (tipo.getSelectedItem().equals("Libros")){
-                    try {
-                        AlmacenarLibros x = new AlmacenarLibros(tipo.getSelectedItem().toString(), Autor.getText(),
-                                Titulo.getText(), Edicion.getText(), Descripcion.getText(), Temas.getText(), Copias.getText(), Disponibles.getText());
-                     ControlarBiblios.guardarBiblios(x);
-                    } catch (NumberFormatException m) {
-                        JOptionPane.showMessageDialog(null, "No se rellenaron los campos correctamente");
-                    }
+                    AlmacenarLibros y = new AlmacenarLibros(tipo.getSelectedItem().toString(), Autor.getText(), Titulo.getText(), Edicion.getText(), Descripcion.getText(), Temas.getText(), Copias.getText(), Disponibles.getText());
+                    ControlarBiblios.eliminar(y);
+                } else if(tipo.getSelectedItem().equals("Revista")){
+                    AlmacenarRevistas z = new AlmacenarRevistas(tipo.getSelectedItem().toString(), Autor.getText(), Titulo.getText(), Edicion.getText(), Descripcion.getText(),
+                            Temas.getText(), Frecuencia.getText(), Ejemplares.getText(), Copias.getText(), Disponibles.getText());
+                    ControlarBiblios.eliminar(z);
 
-
-            }
-
-                if (tipo.getSelectedItem().equals("Revista")){
-                    try {
-                        AlmacenarRevistas y = new AlmacenarRevistas(tipo.getSelectedItem().toString(),Autor.getText(),Titulo.getText(),Edicion.getText(),Descripcion.getText()
-                        ,Temas.getText(),Frecuencia.getText(),Ejemplares.getText(),Copias.getText(),Disponibles.getText());
-                        ControlarBiblios.guardarBiblios(y);
-                    } catch (NumberFormatException m) {
-                        JOptionPane.showMessageDialog(null, "No se rellenaron los campos correctamente");
-                    }
-
+                } else if(tipo.getSelectedItem().equals("Tesis")){
+                    AlmacenarTesis x = new AlmacenarTesis(tipo.getSelectedItem().toString(), Autor.getText(), Titulo.getText(), Edicion.getText(), Descripcion.getText(),
+                            Temas.getText(), Area.getText(), Copias.getText(), Disponibles.getText());
+                    ControlarBiblios.eliminar(x);
                 }
-
-                if (tipo.getSelectedItem().equals("Tesis")){
-                    try {
-                        AlmacenarTesis z = new AlmacenarTesis(tipo.getSelectedItem().toString(),Autor.getText(),Titulo.getText(),Edicion.getText(),Descripcion.getText()
-                        ,Temas.getText(),Area.getText(),Copias.getText(),Disponibles.getText());
-                        ControlarBiblios.guardarBiblios(z);
-                    } catch (NumberFormatException m) {
-                        JOptionPane.showMessageDialog(null, "No se rellenaron los campos correctamente");
-                    }
-
-                }
-
                 Admin h= new Admin();
                 h.setVisible(true);
                 dispose();
@@ -230,8 +207,8 @@ public class CargaIndividual extends JFrame {
         ActionListener canc= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-          Admin o= new Admin();
-          o.setVisible(true);
+                Admin o= new Admin();
+                o.setVisible(true);
                 dispose();
             }
         };
@@ -239,7 +216,7 @@ public class CargaIndividual extends JFrame {
 
         Seleccionar= new JButton();
         Seleccionar.setBounds(500,90,100,20);
-        Seleccionar.setText("Seleccionar ");
+        Seleccionar.setText("Buscar ");
         Seleccionar.setBackground(new Color(214, 219, 223));
         Seleccionar.setFont(new Font("arial",Font.BOLD,12));
         Seleccionar.setBorder(border);
@@ -247,18 +224,51 @@ public class CargaIndividual extends JFrame {
         ActionListener seleccion= new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-          if(tipo.getSelectedItem().equals("Libros")){
-              Frecuencia.setEnabled(false);
-              Ejemplares.setEnabled(false);
-              Area.setEnabled(false);
-          }
-
-               else if(tipo.getSelectedItem().equals("Revista")){
-                    Area.setEnabled(false);
-                } else if(tipo.getSelectedItem().equals("Tesis")){
-Ejemplares.setEnabled(false);
-Frecuencia.setEnabled(false);
-          }
+                try {
+                    AlmacenarLibros x = ControlarBiblios.buscarlibro(Titulo.getText());
+                    tipo.setSelectedItem(x.getLibros());
+                    Autor.setText(x.getAutor());
+                    Edicion.setText(x.getStredicion());
+                    Descripcion.setText(x.getDescripción());
+                    Temas.setText(x.getTemasconcatenados());
+                    Copias.setText(x.getStrcopias());
+                    Disponibles.setText(x.getStrdisponibles());
+                    Ejemplares.setText("");
+                    Frecuencia.setText("");
+                    Area.setText("");
+                } catch (NullPointerException l){
+                    System.out.println();
+                }
+                try {
+                    AlmacenarTesis r = ControlarBiblios.buscarTesis(Titulo.getText());
+                    tipo.setSelectedItem(r.getTipos());
+                    Autor.setText(r.getAutor());
+                    Edicion.setText(r.getStredicion());
+                    Descripcion.setText(r.getDescripción());
+                    Temas.setText(r.getTemasconcatenados());
+                    Area.setText(r.getArea());
+                    Copias.setText(r.getStrcopias());
+                    Disponibles.setText(r.getStrdisponibles());
+                    Ejemplares.setText("");
+                    Frecuencia.setText("");
+                } catch (NullPointerException w){
+                    System.out.println();
+                }
+                try {
+                    AlmacenarRevistas o = ControlarBiblios.buscarevistas(Titulo.getText());
+                    tipo.setSelectedItem(o.getRevista());
+                    Autor.setText(o.getAutor());
+                    Edicion.setText(o.getStrEdicion());
+                    Descripcion.setText(o.getDescripción());
+                    Temas.setText(o.getTemasconcatenados());
+                    Copias.setText(o.getStrcopias());
+                    Disponibles.setText(o.getStrdisponibles());
+                    Ejemplares.setText(o.getStrEjemplares());
+                    Frecuencia.setText(o.getFrecuencia());
+                    Area.setText("");
+                } catch (NullPointerException q){
+                    System.out.println();
+                }
             }
         };
         Seleccionar.addActionListener(seleccion);
@@ -266,4 +276,15 @@ Frecuencia.setEnabled(false);
 
 
     }
+
+    public void modi(){
+        try {
+
+
+
+        } catch (NumberFormatException m){
+            System.out.println();
+        }
+    }
 }
+

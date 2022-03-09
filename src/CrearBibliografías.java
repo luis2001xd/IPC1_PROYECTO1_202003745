@@ -51,6 +51,16 @@ individual.addActionListener(indi);
         masiva.setFont(new Font("Georgia",Font.PLAIN,14));
         panel.add(masiva);
 
+        ActionListener masiva1= new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+          CargaMasiva k= new CargaMasiva();
+          k.setVisible(true);
+          dispose();
+            }
+        };
+        masiva.addActionListener(masiva1);
+
         cancelar= new JButton();
         cancelar.setBounds(170,340,150,50);
         cancelar.setBackground(new Color(214, 219, 223));

@@ -159,7 +159,7 @@ public class CrearUsuarios extends JFrame{
 
     public void creacion (){
         AlmacenarUsuarios x= new AlmacenarUsuarios(ID.getText(),Nombre.getText(),Apellido.getText(),Usuario.getText(),rol.getSelectedItem().toString(),Contraseña.getText());
-        ControlarUsuarios.guardar(x);
+        ControlarUsuarios.guardar(x,ID.getText());
         Admin m= new Admin();
         m.setVisible(true);
     }
